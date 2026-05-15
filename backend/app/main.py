@@ -25,6 +25,11 @@ app.include_router(patients.router, prefix="/api/patients", tags=["patients"])
 app.include_router(export.router, prefix="/api/export", tags=["export"])
 
 
+@app.get("/")
+def root():
+    return {"status": "ok", "service": "healthmetrics-pro", "version": "1.0.0"}
+
+
 @app.get("/health")
 def health():
     return {"status": "ok", "service": "healthmetrics-pro"}
