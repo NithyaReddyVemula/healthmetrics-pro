@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { MetricsDashboard, PatientListResponse, Filters } from "./types";
 
-const BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const BASE = import.meta.env.VITE_API_URL || "https://healthmetrics-api.onrender.com";
 const api = axios.create({ baseURL: BASE });
 
 export async function fetchDashboard(): Promise<MetricsDashboard> {
