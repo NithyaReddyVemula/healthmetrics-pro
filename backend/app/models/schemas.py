@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from sqlalchemy import Boolean, Column, Date, DateTime, Decimal, Integer, String, ForeignKey
+from sqlalchemy import Boolean, Column, Date, DateTime, Numeric, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app.models.database import Base
 
@@ -43,6 +43,6 @@ class QualitySummary(Base):
     measure_name = Column(String(100), nullable=False)
     total_patients = Column(Integer, nullable=False)
     compliant_patients = Column(Integer, nullable=False)
-    compliance_rate = Column(Decimal(5, 2), nullable=False)
+    compliance_rate = Column(Numeric(5, 2), nullable=False)
     month_year = Column(Date, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)

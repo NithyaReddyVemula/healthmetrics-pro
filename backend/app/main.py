@@ -1,10 +1,14 @@
 import os
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from app.routers import metrics, patients, export
 
 load_dotenv()
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.models.database import apply_sqlite_patch
+from app.routers import metrics, patients, export
+
+apply_sqlite_patch()
 
 app = FastAPI(title="HealthMetrics Pro API", version="1.0.0")
 
