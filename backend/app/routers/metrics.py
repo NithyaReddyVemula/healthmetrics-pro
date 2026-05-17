@@ -2,7 +2,7 @@ from typing import Optional
 from datetime import date
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import func, case
 from app.models.database import get_db
 from app.models.schemas import QualitySummary, Patient, HedisMeasure
 from app.models.pydantic_models import MetricsDashboard, QualitySummaryOut
@@ -64,7 +64,7 @@ def _from_patients(db: Session, payer, gender, min_age, max_age):
             HedisMeasure.measure_code,
             HedisMeasure.measure_name,
             func.count(HedisMeasure.id).label("total_patients"),
-            func.sum(func.cast(HedisMeasure.is_compliant, int)).label("compliant_patients"),
+            func.sum(case((HedisMeasure.is_compliant == True, 1), else_=0)).label("compliant_patients"),
         )
         .filter(HedisMeasure.patient_id.in_(patient_ids))
         .group_by(HedisMeasure.measure_code, HedisMeasure.measure_name)
