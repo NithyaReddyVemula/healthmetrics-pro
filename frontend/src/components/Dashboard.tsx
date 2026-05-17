@@ -13,10 +13,11 @@ export function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDashboard()
+    setLoading(true);
+    fetchDashboard(filters)
       .then(setData)
       .finally(() => setLoading(false));
-  }, []);
+  }, [filters]);
 
   if (loading) return (
     <div style={{ color: "#f9a8d4", textAlign: "center", marginTop: 80, fontSize: "1.1rem" }}>

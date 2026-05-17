@@ -4,8 +4,10 @@ import type { MetricsDashboard, PatientListResponse, Filters } from "./types";
 const BASE = import.meta.env.VITE_API_URL || "https://healthmetrics-api.onrender.com";
 const api = axios.create({ baseURL: BASE });
 
-export async function fetchDashboard(): Promise<MetricsDashboard> {
-  const { data } = await api.get<MetricsDashboard>("/api/metrics/dashboard");
+export async function fetchDashboard(filters: Filters = {}): Promise<MetricsDashboard> {
+  const { data } = await api.get<MetricsDashboard>("/api/metrics/dashboard", {
+    params: filters,
+  });
   return data;
 }
 
